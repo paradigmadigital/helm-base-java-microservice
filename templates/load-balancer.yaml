@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{required "A valid .Values.msName entry required!" .Values.msName | quote}}
+spec:
+  ports:
+  - port: {{.Values.containerPort}}
+  selector:
+    app: {{required "A valid .Values.msName entry required!" .Values.msName | quote}}

@@ -1,0 +1,19 @@
+javaOpts: -Djava.security.egd=file:/dev/./urandom -Xms256m -Xmx512M
+javaParameters: --spring.profiles.active=dev
+configServer: http://config-server:8080
+containerPort: 8080
+readinessPath: /manage/health
+readinessDelay: 60
+readinessTimeout: 5
+readinessPeriod: 10
+readinessSuccess: 1
+readinessFailure: 6
+livenessPath: /manage/health
+livenessTimeout: 5
+livenessPeriod: 10
+livenessSuccess: 1
+livenessFailure: 6
+requestsCpu: 50m
+requestsMemory: 512Mi
+limitsCpu: 200m
+limitsMemory: 800Mi

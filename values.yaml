@@ -9,6 +9,7 @@ readinessPeriod: 10
 readinessSuccess: 1
 readinessFailure: 6
 livenessPath: /manage/health
+livenessDelay: 120
 livenessTimeout: 5
 livenessPeriod: 10
 livenessSuccess: 1
@@ -17,3 +18,5 @@ requestsCpu: 50m
 requestsMemory: 512Mi
 limitsCpu: 200m
 limitsMemory: 800Mi
+externalBalancer: no
+isConfigServer: no

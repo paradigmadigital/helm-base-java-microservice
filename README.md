@@ -26,6 +26,7 @@ helm install . --values my-values.yaml --name my-release
 * `readinessSuccess`: Number of tests to do until consider the pod is ready. [Default: 1]
 * `readinessFailure`: Number of tests to fail until consider the pod is not ready. [Default: 6]
 * `livenessPath`: Path to test if pod is alive. [Default: /manage/health]
+* `livenessDelay`: Number of seconds to wait to test if the pod is live. [Default: 120]
 * `livenessTimeout`: Number of seconds to wait to mark as invalid an alive test. [Default: 5]
 * `livenessPeriod`: Interval of seconds to wait between liveness tests. [Default: 10]
 * `livenessSuccess`: Number of tests to do until consider the pod is alive. [Default: 1]
@@ -34,3 +35,5 @@ helm install . --values my-values.yaml --name my-release
 * `requestsMemory`: Memory aproximated use. [Default: 512Mi]
 * `limitsCpu`: CPU limit use. [Default: 200m]
 * `limitsMemory`: CPU Memory use. [Default: 800Mi]
+* `externalBalancer`: Create an external load balancer or internal. [Default: no]
+* `isConfigServer`: If set to yes, sets the `eureka-server` url, if set to no, the `config-server` url. [Default: no]

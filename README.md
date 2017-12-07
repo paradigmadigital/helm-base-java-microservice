@@ -26,7 +26,7 @@ helm install . --values my-values.yaml --name my-release
 * `readinessSuccess`: Number of tests to do until consider the pod is ready. [Default: 1]
 * `readinessFailure`: Number of tests to fail until consider the pod is not ready. [Default: 6]
 * `livenessPath`: Path to test if pod is alive. [Default: /manage/health]
-* `livenessDelay`: Number of seconds to wait to test if the pod is live. [Default: 120]
+* `livenessDelay`: Number of seconds to wait to test if the pod is alive. [Default: 120]
 * `livenessTimeout`: Number of seconds to wait to mark as invalid an alive test. [Default: 5]
 * `livenessPeriod`: Interval of seconds to wait between liveness tests. [Default: 10]
 * `livenessSuccess`: Number of tests to do until consider the pod is alive. [Default: 1]

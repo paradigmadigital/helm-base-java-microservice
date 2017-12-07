@@ -20,3 +20,6 @@ limitsCpu: 200m
 limitsMemory: 800Mi
 externalBalancer: no
 isConfigServer: no
+minReplicas: 1
+maxReplicas: 3
+targetCpu: 50

@@ -1,0 +1,65 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{required "A valid .Values.msName entry required!" .Values.msName | quote}}
+spec:
+  replicas: 1
+  minReadySeconds: 0
+  template:
+    metadata:
+      labels:
+        app: {{required "A valid .Values.msName entry required!" .Values.msName | quote}}
+    spec:
+      containers:
+      - env:
+        - name: NAME
+          value: {{required "A valid .Values.msName entry required!" .Values.msName | quote}}
+        - name: JAVA_OPTS_EXT
+          value: {{.Values.javaOpts | quote}}
+        - name: JAVA_PARAMETERS
+          value: {{.Values.javaParameters | quote}}
+        - name: PROJECT_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        {{if .Values.isConfigServer}}
+        - name: EUREKA_SERVER_URL
+          value: http://eureka-server:8080
+        {{else}}
+        - name: CONFIG_SERVER
+          value: {{.Values.configServer | quote}}
+        {{end}}
+        image: {{required "A valid .Values.dockerImage entry required!" .Values.dockerImage | quote}}
+        name: {{required "A valid .Values.msName entry required!" .Values.msName | quote}}
+        ports:
+        - containerPort: {{.Values.containerPort}}
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: {{.Values.readinessPath}}
+            port: {{.Values.containerPort}}
+          initialDelaySeconds: {{.Values.readinessDelay}}
+          timeoutSeconds: {{.Values.readinessTimeout}}
+          periodSeconds: {{.Values.readinessPeriod}}
+          successThreshold: {{.Values.readinessSuccess}}
+          failureThreshold: {{.Values.readinessFailure}}
+        livenessProbe:
+          httpGet:
+            port: {{.Values.containerPort}}
+            path: {{.Values.livenessPath}}
+          initialDelaySeconds: {{.Values.livenessDelay}}
+          timeoutSeconds: {{.Values.livenessTimeout}}
+          periodSeconds: {{.Values.livenessPeriod}}
+          successThreshold: {{.Values.livenessSuccess}}
+          failureThreshold: {{.Values.livenessFailure}}
+        resources:
+          requests:
+            cpu: {{.Values.requestsCpu | quote}}
+            memory: {{.Values.requestsMemory | quote}}
+          limits:
+            cpu: {{.Values.limitsCpu | quote}}
+            memory: {{.Values.limitsMemory | quote}}
+        securityContext: {}
+        terminationMessagePath: /dev/termination-log
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always

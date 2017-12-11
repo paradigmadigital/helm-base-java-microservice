@@ -1,0 +1,3 @@
+name: base-java-microservice
+version: 0.1
+description: Provides sane values for deploying java microservices in kubernetes

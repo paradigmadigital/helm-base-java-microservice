@@ -14,7 +14,7 @@ livenessTimeout: 5
 livenessPeriod: 10
 livenessSuccess: 1
 livenessFailure: 6
-requestsCpu: 50m
+requestsCpu: 100m
 requestsMemory: 512Mi
 limitsCpu: 200m
 limitsMemory: 800Mi

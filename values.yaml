@@ -1,6 +1,7 @@
 javaOpts: -Djava.security.egd=file:/dev/./urandom -Xms256m -Xmx512M
 javaParameters: --spring.profiles.active=dev
 configServer: http://config-server:8080
+listenPort: 80
 containerPort: 8080
 readinessPath: /manage/health
 readinessDelay: 60

@@ -18,6 +18,7 @@ helm install . --values my-values.yaml --name my-release
 * `javaOpts`: Java options. [Default: -Djava.security.egd=file:/dev/./urandom -Xms256m -Xmx512M]
 * `javaParameters`: Java parameters. [Default: --spring.profiles.active=dev]
 * `configServer`: Config server url. [Default: http://config-server:8080]
+* `listenPort`: Port opened in the load balancer. [Default: 80]
 * `containerPort`: Container port to bind the webserver. [Default: 8080]
 * `readinessPath`: Path to test if pod is ready. [Default: /manage/health]
 * `readinessDelay`: Number of seconds to wait to test if the pod is ready. [Default: 60]

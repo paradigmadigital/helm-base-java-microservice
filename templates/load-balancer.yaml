@@ -6,7 +6,7 @@ spec:
   {{if .Values.externalBalancer}}
   externalTrafficPolicy: Cluster
   ports:
-  - port: {{.Values.containerPort}}
+  - port: {{.Values.listenPort}}
     protocol: TCP
     targetPort: {{.Values.containerPort}}
   type: LoadBalancer

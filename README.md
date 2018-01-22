@@ -38,3 +38,5 @@ helm install . --values my-values.yaml --name my-release
 * `limitsMemory`: CPU Memory use. [Default: 800Mi]
 * `externalBalancer`: Create an external load balancer or internal. [Default: no]
 * `isConfigServer`: If set to yes, sets the `eureka-server` url, if set to no, the `config-server` url. [Default: no]
+* `minReplicas`: The minimal number of pods that will be running. [Default: 1]
+* `maxReplicas`: The maximal number of pods that will be running. [Default: 3]

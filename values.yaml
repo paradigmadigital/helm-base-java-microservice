@@ -14,9 +14,9 @@ livenessTimeout: 5
 livenessPeriod: 10
 livenessSuccess: 1
 livenessFailure: 6
-requestsCpu: 100m
+requestsCpu: 100Mi
 requestsMemory: 512Mi
-limitsCpu: 200m
+limitsCpu: 200Mi
 limitsMemory: 800Mi
 externalBalancer: no
 isConfigServer: no

@@ -1,5 +1,6 @@
 javaOpts: -Djava.security.egd=file:/dev/./urandom -Xms256m -Xmx512M
 configServer: http://config-server:8080
+springbootProfile: --spring.profiles.active=
 listenPort: 80
 containerPort: 8080
 readinessPath: /manage/health
@@ -23,3 +24,4 @@ isConfigServer: no
 minReplicas: 1
 maxReplicas: 3
 targetCpu: 50
+environment: local

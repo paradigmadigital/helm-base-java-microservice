@@ -17,6 +17,7 @@ helm install . --values my-values.yaml --name my-release
 * `dockerImage`: Which docker image to run. **Required**.
 * `javaOpts`: Java options. [Default: -Djava.security.egd=file:/dev/./urandom -Xms256m -Xmx512M]
 * `javaParameters`: Java parameters. [Default: Not set]
+* `springbootProfile`: The SpringBoot profile to be used. The profile per se it's empty because it's usually used with environments, and that shouldn't be hardcoded. When `environment` is not set, this variable is also not set, so SpingBoot can use it's local profile. [Default: --spring.profiles.active=]
 * `configServer`: Config server url. [Default: http://config-server:8080]
 * `listenPort`: Port opened in the load balancer. [Default: 80]
 * `containerPort`: Container port to bind the webserver. [Default: 8080]
@@ -40,4 +41,4 @@ helm install . --values my-values.yaml --name my-release
 * `isConfigServer`: If set to yes, sets the `eureka-server` url, if set to no, the `config-server` url. [Default: no]
 * `minReplicas`: The minimal number of pods that will be running. [Default: 1]
 * `maxReplicas`: The maximal number of pods that will be running. [Default: 3]
-* `targetCpu`: In which point should the ms autoscale. [Default: 50]
+* `environment`: The environment in which to be deployed. This is used toguether with `springbootProfile`. [Default: local]

@@ -22,10 +22,10 @@ spec:
         - name: JAVA_PARAMETERS
           value: {{printf "--spring.profiles.active=%s" .Values.environment}}
           {{end}}
-        {{if .Values.isConfigServer}}
+        {{if (.Values.isConfigServer) and (.Values.netflix)}}
         - name: EUREKA_SERVER_URL
           value: http://eureka-server:8080
-        {{else}}
+        {{else if .Values.netflix}}
         - name: CONFIG_SERVER
           value: {{.Values.configServer | quote}}
         {{end}}

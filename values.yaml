@@ -25,3 +25,4 @@ minReplicas: 1
 maxReplicas: 3
 targetCpu: 50
 environment: local
+netflix: no

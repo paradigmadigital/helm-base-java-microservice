@@ -34,6 +34,11 @@ spec:
           value: {{.Values.configServer | quote}}
         {{end}}
         image: {{required "A valid .Values.dockerImage entry required!" .Values.dockerImage | quote}}
+        {{if .Values.imagePullPolicy}}
+        imagePullPolicy:  {{.Values.imagePullPolicy | quote}}
+        {{else}}
+        imagePullPolicy: IfNotPresent
+        {{end}}
         name: {{required "A valid .Values.msName entry required!" .Values.msName | quote}}
         {{if .Values.imagePullPolicy}}
         imagePullPolicy: {{.Values.imagePullPolicy }}

@@ -22,10 +22,6 @@ spec:
         - name: JAVA_PARAMETERS
           value: {{printf "--spring.profiles.active=%s" .Values.environment}}
           {{end}}
-        - name: PROJECT_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
         {{if .Values.isConfigServer}}
         - name: EUREKA_SERVER_URL
           value: http://eureka-server:8080

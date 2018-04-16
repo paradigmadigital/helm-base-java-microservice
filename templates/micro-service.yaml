@@ -35,6 +35,11 @@ spec:
         {{end}}
         image: {{required "A valid .Values.dockerImage entry required!" .Values.dockerImage | quote}}
         name: {{required "A valid .Values.msName entry required!" .Values.msName | quote}}
+        {{if .Values.imagePullPolicy}}
+        imagePullPolicy: {{.Values.imagePullPolicy }}
+        {{else}}
+        imagePullPolicy: IfNotPresent
+        {{end}}
         ports:
         - containerPort: {{.Values.containerPort}}
           protocol: TCP

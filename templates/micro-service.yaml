@@ -4,7 +4,6 @@ metadata:
   name: {{required "A valid .Values.msName entry required!" .Values.msName | quote}}
 spec:
   replicas: {{.Values.minReplicas}}
-  minReadySeconds: 0
   template:
     metadata:
       labels:
@@ -16,8 +15,13 @@ spec:
           value: {{required "A valid .Values.msName entry required!" .Values.msName | quote}}
         - name: JAVA_OPTS_EXT
           value: {{.Values.javaOpts | quote}}
+          {{if .Values.javaParameters}}
         - name: JAVA_PARAMETERS
-          value: {{.Values.javaParameters | quote}}
+          value: {{printf "%s --spring.profiles.active=%s" .Values.javaParameters .Values.environment}}
+          {{else}}
+        - name: JAVA_PARAMETERS
+          value: {{printf "--spring.profiles.active=%s" .Values.environment}}
+          {{end}}
         - name: PROJECT_NAME
           valueFrom:
             fieldRef:
@@ -31,6 +35,11 @@ spec:
         {{end}}
         image: {{required "A valid .Values.dockerImage entry required!" .Values.dockerImage | quote}}
         name: {{required "A valid .Values.msName entry required!" .Values.msName | quote}}
+        {{if .Values.imagePullPolicy}}
+        imagePullPolicy: {{.Values.imagePullPolicy }}
+        {{else}}
+        imagePullPolicy: IfNotPresent
+        {{end}}
         ports:
         - containerPort: {{.Values.containerPort}}
           protocol: TCP
@@ -59,7 +68,3 @@ spec:
           limits:
             cpu: {{.Values.limitsCpu | quote}}
             memory: {{.Values.limitsMemory | quote}}
-        securityContext: {}
-        terminationMessagePath: /dev/termination-log
-      dnsPolicy: ClusterFirst
-      restartPolicy: Always

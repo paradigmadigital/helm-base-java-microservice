@@ -41,4 +41,6 @@ helm install . --values my-values.yaml --name my-release
 * `isConfigServer`: If set to yes, sets the `eureka-server` url, if set to no, the `config-server` url. [Default: no]
 * `minReplicas`: The minimal number of pods that will be running. [Default: 1]
 * `maxReplicas`: The maximal number of pods that will be running. [Default: 3]
+* `targetCpu`: In which point should the ms autoscale. [Default: 50]
 * `environment`: The environment in which to be deployed. This is used toguether with `springbootProfile`. [Default: local]
+* `imagePullPolicy`: Protocol to download the docker image. [Default: IfNotPresent]

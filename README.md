@@ -45,3 +45,5 @@ helm install . --values my-values.yaml --name my-release
 * `targetCpu`: In which point should the ms autoscale. [Default: 50]
 * `environment`: The environment in which to be deployed. This is used toguether with `springbootProfile`. [Default: local]
 * `imagePullPolicy`: Protocol to download the docker image. [Default: IfNotPresent]
+* `hasConfigMap`: The name of a volume to mount. [Default: False]
+* `configMapPath`: The path in which to mount the configmap. [Default: /{{.Values.msName}}]

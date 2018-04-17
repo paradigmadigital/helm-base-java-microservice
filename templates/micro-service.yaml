@@ -69,3 +69,15 @@ spec:
           limits:
             cpu: {{.Values.limitsCpu | quote}}
             memory: {{.Values.limitsMemory | quote}}
+      {{if .Values.hasConfigMap}}
+        volumeMounts:
+        - name: config
+          mountPath: {{.Values.configMapPath}}{{.Values.hasConfigMap}}
+          readOnly: true
+          subPath: {{.Values.hasConfigMap}}
+      volumes:
+      - name: config
+        configMap:
+          defaultMode: 0644
+          name: {{.Values.msName}}
+      {{end}}

@@ -26,3 +26,5 @@ maxReplicas: 3
 targetCpu: 50
 environment: local
 netflix: no
+hasConfigMap: False
+configMapPath: /

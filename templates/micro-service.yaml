@@ -22,18 +22,19 @@ spec:
         - name: JAVA_PARAMETERS
           value: {{printf "--spring.profiles.active=%s" .Values.environment}}
           {{end}}
-        - name: PROJECT_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
-        {{if .Values.isConfigServer}}
+        {{if (.Values.isConfigServer) and (.Values.netflix)}}
         - name: EUREKA_SERVER_URL
           value: http://eureka-server:8080
-        {{else}}
+        {{else if .Values.netflix}}
         - name: CONFIG_SERVER
           value: {{.Values.configServer | quote}}
         {{end}}
         image: {{required "A valid .Values.dockerImage entry required!" .Values.dockerImage | quote}}
+        {{if .Values.imagePullPolicy}}
+        imagePullPolicy:  {{.Values.imagePullPolicy | quote}}
+        {{else}}
+        imagePullPolicy: IfNotPresent
+        {{end}}
         name: {{required "A valid .Values.msName entry required!" .Values.msName | quote}}
         {{if .Values.imagePullPolicy}}
         imagePullPolicy: {{.Values.imagePullPolicy }}
@@ -68,3 +69,15 @@ spec:
           limits:
             cpu: {{.Values.limitsCpu | quote}}
             memory: {{.Values.limitsMemory | quote}}
+      {{if .Values.hasConfigMap}}
+        volumeMounts:
+        - name: config
+          mountPath: {{.Values.configMapPath}}{{.Values.hasConfigMap}}
+          readOnly: true
+          subPath: {{.Values.hasConfigMap}}
+      volumes:
+      - name: config
+        configMap:
+          defaultMode: 0644
+          name: {{.Values.msName}}
+      {{end}}

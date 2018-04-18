@@ -4,7 +4,6 @@ metadata:
   name: {{required "A valid .Values.msName entry required!" .Values.msName | quote}}
 spec:
   {{if .Values.externalBalancer}}
-  externalTrafficPolicy: Cluster
   ports:
   - port: {{.Values.listenPort}}
     protocol: TCP

@@ -46,6 +46,6 @@ helm install . --values my-values.yaml --name my-release
 * `environment`: The environment in which to be deployed. This is used toguether with `springbootProfile`. [Default: local]
 * `imagePullPolicy`: Protocol to download the docker image. [Default: IfNotPresent]
 * `configMapName`: The name of the file to mount. [Default: False]
-* `configMapPath`: The path in which to mount the configmap. [Default: /{{.Values.msName}}]
-* `configMapContent`: The content of the configmap. [Default: /{{.Values.msName}}]
+* `configMapPath`: The path in which to mount the configmap. [Default: False]
+* `configMapContent`: The content of the configmap. [Default: False]
 

@@ -1,3 +1,4 @@
+---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -6,6 +7,8 @@ spec:
   replicas: {{.Values.minReplicas}}
   template:
     metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
       labels:
         app: {{required "A valid .Values.msName entry required!" .Values.msName | quote}}
     spec:
@@ -69,12 +72,12 @@ spec:
           limits:
             cpu: {{.Values.limitsCpu | quote}}
             memory: {{.Values.limitsMemory | quote}}
-      {{if .Values.hasConfigMap}}
+      {{if .Values.configMapContent}}
         volumeMounts:
         - name: config
-          mountPath: {{.Values.configMapPath}}{{.Values.hasConfigMap}}
+          mountPath: {{.Values.configMapPath}}{{.Values.configMapName}}
           readOnly: true
-          subPath: {{.Values.hasConfigMap}}
+          subPath: {{.Values.configMapName}}
       volumes:
       - name: config
         configMap:

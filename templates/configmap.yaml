@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{required "A valid .Values.msName entry required!" .Values.msName | quote}}
+  labels:
+    app: {{required "A valid .Values.msName entry required!" .Values.msName | quote}}
+data:
+  application.yml: |
+{{ required "Is required a configuration content!" .Values.configMapContent | indent 4}}

@@ -70,7 +70,7 @@ spec:
           limits:
             cpu: {{.Values.limitsCpu | quote}}
             memory: {{.Values.limitsMemory | quote}}
-      {{if .Values.configmapContent}}
+      {{if .Values.configMapContent}}
         volumeMounts:
         - name: config
           mountPath: {{.Values.configMapPath}}{{.Values.configMapName}}

@@ -49,5 +49,5 @@ helm install . --values my-values.yaml --name my-release
 * `configMapName`: The name of the file to mount. [Default: False]
 * `configMapPath`: The path in which to mount the configmap. [Default: False]
 * `configMapContent`: The content of the configmap. [Default: False]
-* `nodeAffinityinstancegroup`:Tags of nodes
-* `nodeAntiAffinityinstancegroup`: Tags of nodes
+* `nodeAffinityinstancegroup`: The node's label to assign pod affinity
+* `nodeAntiAffinityinstancegroup`: The node's label to assign pod affinity

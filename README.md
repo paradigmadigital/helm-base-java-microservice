@@ -7,7 +7,8 @@ This chart creates a deployment designed to be used as template with Java micros
 ```bash
 git clone https://git.paradigmadigital.com/helm/base-java-microservice/
 cd base-java-microservice
-# create and edit my-values.yaml
+
+# Before install of module, you need configurate file my-values.yaml
 helm install . --values my-values.yaml --name my-release
 ```
 
@@ -48,4 +49,5 @@ helm install . --values my-values.yaml --name my-release
 * `configMapName`: The name of the file to mount. [Default: False]
 * `configMapPath`: The path in which to mount the configmap. [Default: False]
 * `configMapContent`: The content of the configmap. [Default: False]
-
+* `nodeAffinityinstancegroup`:Tags of nodes
+* `nodeAntiAffinityinstancegroup`: Tags of nodes

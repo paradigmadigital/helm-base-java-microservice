@@ -12,6 +12,29 @@ spec:
       labels:
         app: {{required "A valid .Values.msName entry required!" .Values.msName | quote}}
     spec:
+    {{- if  or .Values.nodeAffinityInstanceGroup  .Values.nodeAntiAffInityInstanceGroup }}
+      affinity:
+    {{- end }}
+      {{- if .Values.nodeAffinityInstanceGroup}}
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+           nodeSelectorTerms:
+            - matchExpressions:
+              - key: kops.k8s.io/instancegroup
+                operator: In
+                values:
+                - {{.Values.nodeAffinityInstanceGroup}}
+      {{- end }}
+      {{- if .Values.nodeAntiAffInityInstanceGroup }}
+        nodeAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+           nodeSelectorTerms:
+            - matchExpressions:
+              - key: kops.k8s.io/instancegroup
+                operator: In
+                values:
+                - {{.Values.nodeAntiAffInityInstanceGroup}}
+      {{- end }}
       containers:
       - env:
         - name: NAME

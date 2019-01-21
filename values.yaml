@@ -28,3 +28,5 @@ environment: local
 netflix: no
 hasConfigMap: False
 configMapPath: /
+
+

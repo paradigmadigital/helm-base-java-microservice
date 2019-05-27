@@ -19,13 +19,13 @@ requestsCpu: 200m
 requestsMemory: 512Mi
 limitsCpu: 500m
 limitsMemory: 800Mi
-externalBalancer: no
-isConfigServer: no
+externalBalancer: false
+isConfigServer: false
 minReplicas: 1
 maxReplicas: 3
 targetCpu: 50
 environment: local
-netflix: no
 hasConfigMap: False
+netflix: false
 configMapPath: /
 antiAffinity: "soft"

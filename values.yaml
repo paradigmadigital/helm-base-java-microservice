@@ -29,3 +29,4 @@ environment: local
 netflix: false
 configMapPath: /
 antiAffinity: "soft"
+antiAffinityTopologyKey: "kubernetes.io/hostname"

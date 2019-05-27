@@ -7,8 +7,10 @@ spec:
   replicas: {{.Values.minReplicas}}
   template:
     metadata:
+      {{if .Values.configMapName}}
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+      {{end}}
       labels:
         app: {{required "A valid .Values.msName entry required!" .Values.msName | quote}}
     spec:

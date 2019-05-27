@@ -1,0 +1,30 @@
+---
+suite: test deployment
+templates:
+  - deployment.yaml
+tests:
+  - it: should set affinity to soft if not explicitly set
+    set:
+      msName: test
+      dockerImage: test
+    asserts:
+      - isNotNull:
+          path: spec.template.spec.affinity.podAntiAffinity.preferredDuringSchedulingIgnoredDuringExecution
+
+  - it: should set affinity to soft if explicitly set
+    set:
+      msName: test
+      dockerImage: test
+      antiAffinity: soft
+    asserts:
+      - isNotNull:
+          path: spec.template.spec.affinity.podAntiAffinity.preferredDuringSchedulingIgnoredDuringExecution
+
+  - it: should set affinity to soft if not explicitly set
+    set:
+      msName: test
+      dockerImage: test
+      antiAffinity: hard
+    asserts:
+      - isNotNull:
+          path: spec.template.spec.affinity.podAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution

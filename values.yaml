@@ -28,5 +28,4 @@ environment: local
 netflix: no
 hasConfigMap: False
 configMapPath: /
-
-
+antiAffinity: "soft"

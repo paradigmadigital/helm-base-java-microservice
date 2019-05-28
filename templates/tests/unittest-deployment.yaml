@@ -20,7 +20,7 @@ tests:
       - isNotNull:
           path: spec.template.spec.affinity.podAntiAffinity.preferredDuringSchedulingIgnoredDuringExecution
 
-  - it: should set affinity to soft if not explicitly set
+  - it: should set affinity to hard if explicitly set
     set:
       msName: test
       dockerImage: test

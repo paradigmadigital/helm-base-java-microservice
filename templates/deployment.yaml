@@ -7,33 +7,38 @@ spec:
   replicas: {{.Values.minReplicas}}
   template:
     metadata:
+      {{if .Values.configMapName}}
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+      {{end}}
       labels:
         app: {{required "A valid .Values.msName entry required!" .Values.msName | quote}}
     spec:
-    {{- if  or .Values.nodeAffinityInstanceGroup  .Values.nodeAntiAffInityInstanceGroup }}
+      {{- if or (eq .Values.antiAffinity "hard") (eq .Values.antiAffinity "soft") .Values.nodeAffinity }}
       affinity:
-    {{- end }}
-      {{- if .Values.nodeAffinityInstanceGroup}}
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-           nodeSelectorTerms:
-            - matchExpressions:
-              - key: kops.k8s.io/instancegroup
-                operator: In
-                values:
-                - {{.Values.nodeAffinityInstanceGroup}}
       {{- end }}
-      {{- if .Values.nodeAntiAffInityInstanceGroup }}
-        nodeAntiAffinity:
+      {{- if eq .Values.antiAffinity "hard" }}
+        podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
-           nodeSelectorTerms:
-            - matchExpressions:
-              - key: kops.k8s.io/instancegroup
+          - labelSelector:
+              matchExpressions:
+              - key: app
                 operator: In
                 values:
-                - {{.Values.nodeAntiAffInityInstanceGroup}}
+                - {{.Values.msName}}
+            topologyKey: {{ .Values.antiAffinityTopologyKey }}
+      {{- else if eq .Values.antiAffinity "soft" }}
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            podAffinityTerm:
+              topologyKey: {{ .Values.antiAffinityTopologyKey }}
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - {{.Values.msName}}
       {{- end }}
       containers:
       - env:

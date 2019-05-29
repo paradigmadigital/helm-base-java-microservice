@@ -1,3 +1,4 @@
+---
 javaOpts: -Djava.security.egd=file:/dev/./urandom -Xms256m -Xmx512M
 configServer: http://config-server:8080
 springbootProfile: --spring.profiles.active=
@@ -19,14 +20,13 @@ requestsCpu: 200m
 requestsMemory: 512Mi
 limitsCpu: 500m
 limitsMemory: 800Mi
-externalBalancer: no
-isConfigServer: no
+externalBalancer: false
+isConfigServer: false
 minReplicas: 1
 maxReplicas: 3
 targetCpu: 50
 environment: local
-netflix: no
-hasConfigMap: False
+netflix: false
 configMapPath: /
-
-
+antiAffinity: "soft"
+antiAffinityTopologyKey: "kubernetes.io/hostname"

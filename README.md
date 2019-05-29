@@ -51,3 +51,9 @@ helm install . --values my-values.yaml --name my-release
 * `configMapContent`: The content of the configmap. [Default: False]
 * `nodeAffinityInstanceGroup`: The node's label to assign pod affinity
 * `nodeAntiAffInityInstanceGroup`: The node's label to assign pod affinity
+
+## Tests
+
+```bash
+helm unittest -f templates/tests/unittest-*.yaml .
+```

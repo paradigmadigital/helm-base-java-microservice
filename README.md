@@ -51,6 +51,15 @@ helm install . --values my-values.yaml --name my-release
 * `configMapContent`: The content of the configmap. [Default: False]
 * `nodeAffinityInstanceGroup`: The node's label to assign pod affinity
 * `nodeAntiAffInityInstanceGroup`: The node's label to assign pod affinity
+* `serviceMonitor.enabled`: Enable Prometheu's ServiceMonitor. [Default: False]
+* `serviceMonitor.prometheus`: Label for prometheus to identify it's
+  ServiceMonitors. [Default: kube-prometheus]
+* `serviceMonitor.metricsPath`: Metrics endpoint in the microservice. [Default:
+  /actuator/prometheus]
+* `serviceMonitor.interval`: Interval of time between petitions to the metrics
+  endpoint. [Default: 60s]
+* `serviceMonitor.targetPort`: Port of the webserver that exposes the metrics.
+  [Default: 8080]
 
 ## Tests
 

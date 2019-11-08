@@ -30,3 +30,9 @@ netflix: false
 configMapPath: /
 antiAffinity: "soft"
 antiAffinityTopologyKey: "kubernetes.io/hostname"
+serviceMonitor:
+  enabled: false
+  prometheus: kube-prometheus
+  metricsPath: /actuator/prometheus
+  interval: 60s
+  targetPort: 8080

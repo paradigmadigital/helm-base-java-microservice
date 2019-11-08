@@ -1,0 +1,30 @@
+---
+suite: test deployment
+templates:
+  - servicemonitor.yaml
+tests:
+  - it: should not show servicemonitor when not enabled
+    set:
+      msName: test
+      dockerImage: test
+      serviceMonitor.enabled: false
+    asserts:
+      - hasDocuments:
+          count: 0
+  - it: should show servicemonitor when enabled
+    set:
+      msName: test
+      dockerImage: test
+      serviceMonitor.enabled: true
+    asserts:
+      - hasDocuments:
+          count: 1
+  - it: servicemonitor spec selector should point to app's name
+    set:
+      msName: test
+      dockerImage: test
+      serviceMonitor.enabled: true
+    asserts:
+      - equal:
+          path: spec.selector.matchLabels.app
+          value: test

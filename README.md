@@ -64,5 +64,5 @@ helm install . --values my-values.yaml --name my-release
 ## Tests
 
 ```bash
-helm unittest -f templates/tests/unittest-*.yaml .
+helm unittest .
 ```

@@ -1,0 +1,24 @@
+{{if .Values.serviceMonitor.enabled}}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app: {{required "A valid .Values.msName entry required!" .Values.msName | quote}}
+    prometheus: {{.Values.serviceMonitor.prometheus}}
+  name: {{required "A valid .Values.msName entry required!" .Values.msName | quote}}
+spec:
+  endpoints:
+  - interval: {{.Values.serviceMonitor.interval }}
+    namespaceSelector:
+      matchNames:
+      - {{.Release.Namespace}}
+    path: {{.Values.serviceMonitor.metricsPath}}
+    targetPort: {{.Values.serviceMonitor.targetPort}}
+    relabelings:
+    - targetLabel: service
+      replacement: {{required "A valid .Values.msName entry required!" .Values.msName | quote}}
+  selector:
+    matchLabels:
+      app: {{required "A valid .Values.msName entry required!" .Values.msName | quote}}
+{{end}}

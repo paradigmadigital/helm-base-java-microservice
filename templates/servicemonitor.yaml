@@ -18,6 +18,8 @@ spec:
     relabelings:
     - targetLabel: service
       replacement: {{required "A valid .Values.msName entry required!" .Values.msName | quote}}
+    - targetLabel: tecnology
+      replacement: java
   selector:
     matchLabels:
       app: {{required "A valid .Values.msName entry required!" .Values.msName | quote}}
